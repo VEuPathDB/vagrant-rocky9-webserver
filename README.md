@@ -70,14 +70,45 @@ export GITHUB_TOKEN=#####
 > tsrc init git@github.com:VEuPathDB/tsrc.git --group websiteRelease
 > cd -
 </pre>
-13. Build a site artifact (start with genomics cohort)
+13. Build site artifacts for each cohort
 <pre>
 > ./gus-site-build-deploy/bin/veupath-package-website.sh \
       project_home \
       build/api \
       ApiCommonPresenters \
       gus-site-build-deploy/config/webapp.prop
+> ./gus-site-build-deploy/bin/veupath-package-website.sh \
+      project_home \
+      build/ortho \
+      OrthoMCLWebsite \
+      gus-site-build-deploy/config/webapp.prop
+> ./gus-site-build-deploy/bin/veupath-package-website.sh \
+      project_home \
+      build/clinepi \
+      ClinEpiPresenters \
+      gus-site-build-deploy/config/webapp.prop
+> ./gus-site-build-deploy/bin/veupath-package-website.sh \
+      project_home \
+      build/mbio \
+      MicrobiomePresenters \
+      gus-site-build-deploy/config/webapp.prop
 </pre>
+14. Build out directory structure for sites and create test sites for each cohort (TODO: use tomcat_instance_framework here)
+<pre>
+> sudo mkdir -p /var/www
+> cd /var/www
+> sudo mkdir -p PlasmoDB/plasmo.test OrthoMCL/orthomcl.test ClinEpiDB/ce.test MicrobiomeDB/mbio.test
+> sudo chmod 777 */*
+> sudo ln -s PlasmoDB/plasmo.test test.plasmodb.org
+> sudo ln -s OrthoMCL/orthomcl.test test.orthomcl.org
+> sudo ln -s ClinEpiDB/ce.test test.clinepidb.org
+> sudo ln -s MicrobiomeDB/mbio.test test.microbiomedb.org
+</pre>
+16. Create conifer configuration dependencies
+
+
+17. Unpack and configure sites
+
 
 Lots more stuff to do here!  Next step: deployment!
 
