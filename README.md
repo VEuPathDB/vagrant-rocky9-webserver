@@ -10,6 +10,8 @@ Testbed for building websites on Rocky 8 with Java 21 and Tomcat 10
 > sudo apt-get install vagrant
 > vagrant plugin install vagrant-vbguest
 </pre>
+If vagrant install doesn't work, follow instructions here: https://developer.hashicorp.com/vagrant/install
+
 3. Clone this repo and create the VM
 <pre>
 > git clone git@github.com:VEuPathDB/vagrant-rocky8-webserver.git
