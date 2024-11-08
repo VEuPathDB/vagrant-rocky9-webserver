@@ -18,6 +18,8 @@ If vagrant install doesn't work, follow instructions here: https://developer.has
 > cd vagrant-rocky8-webserver
 > vagrant up
 </pre>
+**Note**: you might have to enable virtualization in your BIOS.  (You might get an error hinting at that.)
+
 4. This may result in a time out at "SSH auth method: private key".  To fix:
 
     - Run "vagrant halt", which will shut down the attempted boot
