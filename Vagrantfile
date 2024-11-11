@@ -9,8 +9,8 @@ sudo xfs_growfs /dev/sda4
 SCRIPT
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "rockylinux/8"
-  config.vm.box_version = "8.0.0"
+  config.vm.box = "rockylinux/9"
+  config.vm.box_version = "4.0.0"
 
   config.vm.disk :disk, size: "25GB", primary: true
 
@@ -24,6 +24,6 @@ Vagrant.configure("2") do |config|
 
   # this didn't work either
   #config.vm.provision "shell", inline: $script
-  #config.vm.provision "shell", path: "system_installs.sh"
+  config.vm.provision "shell", path: "/vagrant/system_installs.sh"
 
 end
