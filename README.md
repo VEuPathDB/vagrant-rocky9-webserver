@@ -76,7 +76,7 @@ export GITHUB_TOKEN=#####
 > bash ./build_installs.sh (copy/pasted file if mount does not work)
 </pre>
 
-14. Build out directory structure for sites and create test sites for each cohort (TODO: use tomcat_instance_framework here)
+12. Build out directory structure for sites and create test sites for each cohort (TODO: use tomcat_instance_framework here)
 <pre>
 > sudo mkdir -p /var/www
 > cd /var/www
@@ -88,17 +88,20 @@ export GITHUB_TOKEN=#####
 > sudo ln -s MicrobiomeDB/mbio.test test.microbiomedb.org
 </pre>
 
-16. Create conifer configuration dependencies
+13. Create conifer configuration dependencies
 
+You will need different conifer_site_vars.yml files for each cohort site.  To start out, copy a conifer_site_vars.yml file from a genomics dev site on palm into `/home/vagrant/site_builds/site_vars/conifer_site_vars.yml.plasmo`.
 
-17. Unpack and configure sites
+14. Unpack and configure sites
 
+Try to deploy the genomics site by running the command:
+<pre>
+> ./gus-site-build-deploy/bin/veupath-unpack-and-configure.sh ~/site_builds/build/api/ApiCommonPresenters_*.tar.gz /var/www/test.plasmodb.org site_vars/conifer_site_vars.yml.plasmo
+</pre>
 
-Lots more stuff to do here!  Next step: deployment!
+Currently this step is failing on a conifer error due to the new python+ansible setup in Rocky 9.  This needs to be fixed up!
 
-
-
-14. When finished testing your local website, destroy the VM with
+15. When finished testing your local website, destroy the VM with
 <pre>
 > vagrant destroy -f
 </pre>
