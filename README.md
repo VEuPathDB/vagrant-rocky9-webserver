@@ -56,7 +56,8 @@ Yes/No? Yes
 -OR-
 > sudo bash ./system_installs.sh (copy/pasted file if mount does not work)
 </pre>
-
+ **Note:** this might take half an hour or so to run
+ 
 9. Log out and back in again to get a clean shell, this time with your local SSH keys
 <pre>
 > exit
