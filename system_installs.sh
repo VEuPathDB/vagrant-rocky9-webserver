@@ -1,7 +1,10 @@
 #!/bin/sh
 
+# update system to latest
+sudo dnf update -y
+
 # basic build tools
-sudo dnf install -y wget emacs gcc gcc-c++ git ant maven php nodejs
+sudo dnf install -y epel-release wget emacs gcc gcc-c++ git ant maven php nodejs ansible-core
 
 # Java
 sudo dnf install -y java-21-openjdk java-21-openjdk-devel
@@ -15,7 +18,7 @@ printf "export JAVA_HOME=/usr/lib/jvm/java PATH=\$JAVA_HOME/bin:\$PATH" > java.s
 source /etc/profile.d/java.sh    # or log in again
 
 # perl and related dependencies
-sudo dnf -y install perl expat-devel
+sudo dnf -y install perl expat-devel # perl-XML-Simple
 echo 'yes' | sudo cpan
 sudo cpan install XML::Simple
 sudo cpan install XML::Parser
@@ -25,7 +28,7 @@ sudo cpan install IO::String # JBrowse dep
 # python 2/3 and related modules
 #   TODO: python3 default Python 3.6 is no longer officially supported!  Figure this out with 3.11.
 #sudo dnf config-manager --set-enabled powertools
-sudo dnf install -y python3-pip
+sudo dnf install -y python3 python3-pip
 #epel-release python3-pip python3-wheel
 #sudo alternatives --set python /usr/bin/python3
 #sudo pip3 install --trusted-host pypi.org --upgrade pip
@@ -36,7 +39,7 @@ sudo dnf install -y python3-pip
 #sudo pip3 install --trusted-host pypi.org six
 #sudo pip3 install --trusted-host pypi.org pyyaml
 #sudo pip3 install --trusted-host pypi.org setuptools-rust
-sudo pip3 install ansible
+#sudo pip3 install ansible
 
 # tsrc
 sudo pip3 install tsrc

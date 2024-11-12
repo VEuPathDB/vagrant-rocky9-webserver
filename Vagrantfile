@@ -24,6 +24,6 @@ Vagrant.configure("2") do |config|
 
   # this didn't work either
   #config.vm.provision "shell", inline: $script
-  config.vm.provision "shell", path: "/vagrant/system_installs.sh"
+  config.vm.provision "shell", path: "./system_installs.sh"
 
 end
