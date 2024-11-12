@@ -3,9 +3,9 @@ Testbed for building websites on Rocky 8 with Java 21 and Tomcat 9
 
 1. Install VirtualBox and Vagrant on your host machine (laptop).
   
-Depending on your Linux distribution, you may be able to use native packaging, or will need to follow the vendor instructions.  Examples:
+Depending on your Linux distribution, you may be able to use native packaging, or will need to follow the vendor instructions.
 
-### Native Packaging
+### Native Packaging Example (your commands may differ)
 <pre>
 > sudo apt-get install virtualbox
 > sudo apt-get install virtualbox-guest-additions-iso
@@ -13,7 +13,7 @@ Depending on your Linux distribution, you may be able to use native packaging, o
 > vagrant plugin install vagrant-vbguest
 </pre>
 
-### Installation Links
+### Vendor Installation Links
 
 [Vagrant](https://developer.hashicorp.com/vagrant/install)
 
