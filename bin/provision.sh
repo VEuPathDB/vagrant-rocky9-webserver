@@ -25,8 +25,6 @@ sudo cpan install XML::Parser
 sudo cpan install XML::Twig
 sudo cpan install IO::String # JBrowse dep
 
-# python 2/3 and related modules
-#   TODO: python3 default Python 3.6 is no longer officially supported!  Figure this out with 3.11.
 #sudo dnf config-manager --set-enabled powertools
 sudo dnf install -y python3 python3-pip
 #epel-release python3-pip python3-wheel

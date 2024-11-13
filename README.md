@@ -1,5 +1,5 @@
 # Vagrant Setup for Running VEuPathDB sites on Rocky 9 VM
-Testbed for building websites on Rocky 8 with Java 21 and Tomcat 9
+Testbed for building websites on Rocky 9 with Java 21 and Tomcat 9
 
 1. Install VirtualBox and Vagrant on your host machine (laptop).
   
@@ -19,7 +19,7 @@ Depending on your Linux distribution, you may be able to use native packaging, o
 
 [VirtualBox](https://www.virtualbox.org/wiki/Linux_Downloads)
 
-2. Check to make sure virtualization extensions are enabled.
+2. Check to make sure virtualization extensions are enabled
 
 Run this command to see if virtualization is enabled (if VT-x is present, you should be good to go)
 ```> lscpu | grep "Virtualization"```
@@ -58,28 +58,30 @@ Yes/No? Yes
       (should now show full usage of 25gb in /dev/sda5)
 > sudo xfs_growfs /dev/sda5
 </pre>
- 
-6. Log out and back in again to get a clean shell, this time with your local SSH keys
+
+6. Supplement ~/.bashrc with github credentials and site tooling
+<pre>
+export GITHUB_USERNAME=#####
+export GITHUB_TOKEN=#####
+
+source /vagrant/bin/devTools.sh
+</pre>
+
+7. Log out and back in again to get a clean shell, this time with your local SSH keys
 <pre>
 > exit
 > vagrant ssh -- -A
 </pre>
 
-7. Add your github credentials to ~/.bashrc and source it
-<pre>
-export GITHUB_USERNAME=#####
-export GITHUB_TOKEN=#####
-</pre>
-
 8. Create a website build framework and build initial tarballs of all four cohorts
 <pre>
-> bash /vagrant/build_installs.sh
+> bash /vagrant/bin/buildSiteArtifacts.sh
 </pre>
-If you encounter "Permission Denied" errors accessing Github, recheck your GITHUB_* env vars and that you sshed in with the -A option.  If it still does not work, try the gotcha fixes [here](https://veupathdb.atlassian.net/wiki/spaces/TECH/pages/108560402/Deploy+Containerized+Services+for+Local+Development#Gotchas-around-SSH-Agent).
+If you encounter "Permission Denied" errors accessing Github, recheck your GITHUB_* env vars and that you SSHed in with the -A option.  If it still does not work, try the gotcha fixes [here](https://veupathdb.atlassian.net/wiki/spaces/TECH/pages/108560402/Deploy+Containerized+Services+for+Local+Development#Gotchas-around-SSH-Agent).  If it still does not work, see [Trouble Shooting #2](https://github.com/VEuPathDB/vagrant-rocky8-webserver/edit/main/README.md#trouble-shooting-2).
 
 9. Build out a directory structure for sites and create test sites for each cohort (TODO: use tomcat_instance_framework here)
 <pre>
-> sudo bash /vagrant/site_installs.sh
+> sudo bash /vagrant/bin/buildSiteDeploymentDirs.sh
 </pre>
 
 10. Create conifer configuration dependencies
@@ -103,12 +105,26 @@ Currently this step is failing on a conifer error due to the new python+ansible 
 ### Trouble Shooting #1
 
 If you encounter a timeout at "SSH auth method: private key" when bringing up the box the first time, try this fix:
-
+```
     - Run "vagrant halt", which will shut down the attempted boot
     - Bring up VirtualBox
     - Right click on your VM and select Settings...
     - Select "System"
     - Check the checkbox next to "Enable EFI" and click OK
-
     - Run "vagrant up" again
+```
 
+### Trouble Shooting #2
+
+If you cannot access github from inside the VM but you can from outside the VM (using the same SSH keys and github crendentials), your key may no longer be ssupported by Rocky (as of Rocky 9.1, crypto-policies enforce 2048-bit RSA key length minimum by default).  RSA keys smaller than 2048 bits are ignored by SSH, and will not be used to connect to Github or VEuPathDB servers).
+
+To generate a new key of sufficient length, go back to your host machine and visit ~/.ssh.  If there is already a id_ed25519.pub, you may have a different problem, since that algorithm should be supported by Rocky 9.  Assuming you do NOT already have a ed25519 key pair, run:
+```
+> ssh-keygen -t ed25519 -C "your_email@example.com"
+Generating public/private ed25519 key pair.
+Enter file in which to save the key (/home/rdoherty/.ssh/id_ed25519):
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again:
+> ssh-add id_ed25519
+```
+This will generate a new, stronger key pair and add it to your ssh-agent.  The last step is to [add this key to Github](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account).
