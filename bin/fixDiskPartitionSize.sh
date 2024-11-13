@@ -13,12 +13,24 @@ echo "Moving secondary GPT header to end of disk"
 sgdisk -e /dev/sda
 partprobe
 
+echo
 echo "Resizing sda5 to the allocated size (type 'Yes' to confirm)"
+echo
 
-sudo parted /dev/sdb resizepart 5 100%
+sudo parted /dev/sda resizepart 5 100%
 
+echo
 echo "Growing filesystem to match allocation"
+echo
 
 sudo xfs_growfs /dev/sda5
 
+echo
+echo "Modified configuration"
+echo
+
+fdisk -l
+
+echo
 echo "Done"
+echo
