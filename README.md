@@ -44,20 +44,9 @@ Note 2: If you encounter a timeout at "SSH auth method: private key", see [Troub
 
 5. Resize installation partition.  The Vagrantfile specifies 25gb but the created partitions may not use it all, resulting in out-of-disk errors later on.  To expand to use the entire disk, run:
 <pre>
-> sudo fdisk -l
-      (may show sda5 using 10gb or less; should be close to 25gb)
-> sudo parted /dev/sda
-(parted) print list                                                       
-Warning: Not all of the space available to /dev/sda appears to be used, you can fix the GPT to use all of the space (an extra 31457280 blocks) or continue with the current setting? 
-Fix/Ignore? Fix
-(parted) resizepart 5 100%
-Warning: Partition /dev/sda5 is being used. Are you sure you want to continue?
-Yes/No? Yes
-(parted) quit
-> sudo fdisk -l
-      (should now show full usage of 25gb in /dev/sda5)
-> sudo xfs_growfs /dev/sda5
+> sudo bash /vagrant/bin/fixDiskPartitionSize.sh
 </pre>
+Note: You will have to confirm the config by interactively typing 'Yes' during the running of this script.
 
 6. Supplement ~/.bashrc with github credentials and site tooling
 <pre>
