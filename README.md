@@ -28,14 +28,14 @@ If not, [these instructions](https://www.geeksforgeeks.org/linux-how-to-detect-i
 3. Clone this repo and create the VM
 The following steps will create and provision the VM, installing required packages to build, deploy, and run a VEuPathDB website
 <pre>
-> git clone git@github.com:VEuPathDB/vagrant-rocky8-webserver.git
-> cd vagrant-rocky8-webserver
+> git clone git@github.com:VEuPathDB/vagrant-rocky9-webserver.git
+> cd vagrant-rocky9-webserver
 > vagrant up
 </pre>
 
 Note 1: This can take quite a while (30+ minutes) to download and install the OS and other dependencies into your VM.
 
-Note 2: If you encounter a timeout at "SSH auth method: private key", see [Trouble Shooting #1](https://github.com/VEuPathDB/vagrant-rocky8-webserver/edit/main/README.md#trouble-shooting-1) below
+Note 2: If you encounter a timeout at "SSH auth method: private key", see [Trouble Shooting #1](https://github.com/VEuPathDB/vagrant-rocky9-webserver/edit/main/README.md#trouble-shooting-1) below
 
 4. SSH into the box
 <pre>
@@ -66,7 +66,7 @@ source /vagrant/bin/devTools.sh
 <pre>
 > bash /vagrant/bin/buildSiteArtifacts.sh
 </pre>
-If you encounter "Permission Denied" errors accessing Github, recheck your GITHUB_* env vars and that you SSHed in with the -A option.  If it still does not work, try the gotcha fixes [here](https://veupathdb.atlassian.net/wiki/spaces/TECH/pages/108560402/Deploy+Containerized+Services+for+Local+Development#Gotchas-around-SSH-Agent).  If it still does not work, see [Trouble Shooting #2](https://github.com/VEuPathDB/vagrant-rocky8-webserver/edit/main/README.md#trouble-shooting-2).
+If you encounter "Permission Denied" errors accessing Github, recheck your GITHUB_* env vars and that you SSHed in with the -A option.  If it still does not work, try the gotcha fixes [here](https://veupathdb.atlassian.net/wiki/spaces/TECH/pages/108560402/Deploy+Containerized+Services+for+Local+Development#Gotchas-around-SSH-Agent).  If it still does not work, see [Trouble Shooting #2](https://github.com/VEuPathDB/vagrant-rocky9-webserver/edit/main/README.md#trouble-shooting-2).
 
 9. Build out a directory structure for sites and create test sites for each cohort (TODO: use tomcat_instance_framework here)
 <pre>
@@ -83,8 +83,6 @@ Try to deploy the genomics site by running the command:
 <pre>
 > ./gus-site-build-deploy/bin/veupath-unpack-and-configure.sh ~/site_builds/build/api/ApiCommonPresenters_*.tar.gz /var/www/test.plasmodb.org site_vars/conifer_site_vars.yml.plasmo
 </pre>
-
-Currently this step is failing on a conifer error due to the new python+ansible setup in Rocky 9.  This needs to be fixed up!
 
 12. When finished testing your local website, destroy the VM with
 <pre>
