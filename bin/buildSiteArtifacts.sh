@@ -22,6 +22,12 @@ cd ApiCommonWebsite
 git checkout no-jbrowse
 cd ..
 
+# Need special conifer branch for python3 + ansible8
+cd conifer
+git checkout rhel-9
+cd ..
+
+# back up out of project_home
 cd ..
 
 echo "Building site artifacts for each cohort..."

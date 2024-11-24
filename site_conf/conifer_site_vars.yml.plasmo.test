@@ -1,0 +1,9 @@
+modelconfig_accountDb_connectionUrl: jdbc:oracle:oci:@acctDbN
+modelconfig_accountDb_login: rdoherty
+modelconfig_accountDb_password: rdoherty_pw
+modelconfig_appDb_connectionUrl: jdbc:oracle:oci:@plas-inc
+modelconfig_appDb_login: rdoherty
+modelconfig_appDb_password: rdoherty_pw
+modelconfig_userDb_connectionUrl: jdbc:oracle:oci:@apicommDevN
+modelconfig_userDb_login: rdoherty
+modelconfig_userDb_password: rdoherty_pw

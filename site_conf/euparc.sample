@@ -1,0 +1,9 @@
+<euparc>
+  <database>
+    <user login="webwww" password="webwww_password"/>
+  </database>
+  <sites>
+    <google_maps api_key="54321"/>
+    <site hostname="q2.plasmodb.org" google_analytics_id="12345"/>
+  </sites>
+</euparc>

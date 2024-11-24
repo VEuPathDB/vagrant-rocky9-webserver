@@ -1,13 +1,14 @@
 #!/bin/sh
 
-# update system to latest
+# update system to latest (9.5 as of this writing)
 sudo dnf update -y
+sudo dnf upgrade -y
 
-# basic build tools
-sudo dnf install -y epel-release wget emacs gcc gcc-c++ git ant maven php nodejs ansible-core
+# basic build/dev tools
+sudo dnf install -y epel-release wget emacs gcc gcc-c++ git
 
-# Java
-sudo dnf install -y java-21-openjdk java-21-openjdk-devel
+# java and related tools
+sudo dnf install -y java-21-openjdk java-21-openjdk-devel ant maven
 sudo alternatives --set java java-21-openjdk.x86_64
 sudo alternatives --set javac java-21-openjdk.x86_64
 sudo alternatives --set jre_openjdk java-21-openjdk.x86_64
@@ -17,55 +18,22 @@ sudo alternatives --set java_sdk_openjdk java-21-openjdk.x86_64
 printf "export JAVA_HOME=/usr/lib/jvm/java PATH=\$JAVA_HOME/bin:\$PATH" > java.sh && sudo mv java.sh /etc/profile.d
 source /etc/profile.d/java.sh    # or log in again
 
-# perl and related dependencies
-sudo dnf -y install perl expat-devel # perl-XML-Simple
+# perl and required modules
+sudo dnf install -y perl expat-devel # perl-XML-Simple
 echo 'yes' | sudo cpan
 sudo cpan install XML::Simple
 sudo cpan install XML::Parser
 sudo cpan install XML::Twig
 sudo cpan install IO::String # JBrowse dep
 
-#sudo dnf config-manager --set-enabled powertools
-sudo dnf install -y python3 python3-pip
-#epel-release python3-pip python3-wheel
-#sudo alternatives --set python /usr/bin/python3
-#sudo pip3 install --trusted-host pypi.org --upgrade pip
-#sudo pip3 install --trusted-host pypi.org --upgrade setuptools
-#sudo dnf install -y python2
+# python and ansible
+sudo dnf install -y python3 python3-pip ansible-core
 
-# conifer dependencies
-#sudo pip3 install --trusted-host pypi.org six
-#sudo pip3 install --trusted-host pypi.org pyyaml
-#sudo pip3 install --trusted-host pypi.org setuptools-rust
-#sudo pip3 install ansible
+# misc dev tools
+sudo dnf install -y php nodejs
 
 # tsrc
 sudo pip3 install tsrc
-
-# python 2 and related modules (attempt 2)
-#sudo dnf config-manager --set-enabled powertools
-#sudo dnf install -y python2
-#sudo alternatives --set python /usr/bin/python2
-#sudo pip2 install --upgrade pip
-#sudo pip2 install --upgrade setuptools
-#sudo pip2 install six
-#sudo pip2 install pyyaml
-#sudo pip2 install setuptools-rust
-#sudo pip2 install ansible
-
-# python 3
-#sudo dnf install -y python3
-#sudo pip3 install --trusted-host pypi.org --upgrade pip
-#sudo pip3 install --trusted-host pypi.org --upgrade setuptools
-#sudo pip3 install tsrc
-
-# helper function to verify checksums
-#verify() {
-#  if [[ "$(sha512sum $3 | awk '{print $1}')" != "$(cat $2 | awk '{print $1}')" ]]; then
-#    echo "$1 checksum verification failed"
-#    exit 1
-#  fi
-#}
 
 # Tomcat 9
 cd /usr/local
