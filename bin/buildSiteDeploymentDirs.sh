@@ -15,7 +15,7 @@ cd /var/www
 for site in ${sites[@]}; do
 
     # pick out data for this site
-    dataArray=( $(echo $siteData | sed 's/:/ /g') )
+    dataArray=( $(echo $site | sed 's/:/ /g') )
     tomcatDir=${dataArray[0]}
     domainLink=${dataArray[1]}
 
