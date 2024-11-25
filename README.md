@@ -77,8 +77,13 @@ If you encounter "Permission Denied" errors accessing Github, recheck your GITHU
 
 10. Create conifer configuration dependencies
 
-You will need different conifer_site_vars.yml files for each cohort site.  To start out, copy a conifer_site_vars.yml file from a genomics dev site on palm into `/home/vagrant/site_builds/site_vars/conifer_site_vars.yml.plasmo`.
-
+    1. You will need different conifer_site_vars.yml files for each cohort site.  To start out:
+        1. `cp /vagrant/sample_confs/conifer_site_vars.yml.test /home/vagrant/site_builds/site_vars/conifer_site_vars.yml.plasmo` and edit to your needs.
+        2. Note QA and prod sites have special configs e.g. `/vagrant/sample_confs/conifer_site_vars.yml.qa`
+    3. `cp /vagrant/sample_confs/apidb_oauth_creds.sample /usr/local/tomcat_instances/shared/.apidb_oauth_creds` and edit to your needs.
+    4. `cp /vagrant/sample_confs/apidb_wdk_key.sample /usr/local/tomcat_instances/shared/.apidb_wdk_key` and edit to your needs.
+    5. `cp /vagrant/sample_confs/euparc.sample /home/vagrant/.euparc` and edit to your needs.
+ 
 11. Unpack and configure sites
 
 Try to deploy the genomics site by running the command:
