@@ -27,6 +27,6 @@ for site in ${sites[@]}; do
     # make soft link to project_home (eases reruns of conifer, if needed)
     cd $domainLink
     ln -s /home/vagrant/site_builds/project_home
-    cd -
+    cd - &> /dev/null
 
 done
