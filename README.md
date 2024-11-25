@@ -83,7 +83,12 @@ If you encounter "Permission Denied" errors accessing Github, recheck your GITHU
     3. `cp /vagrant/sample_confs/apidb_oauth_creds.sample /usr/local/tomcat_instances/shared/.apidb_oauth_creds` and edit to your needs.
     4. `cp /vagrant/sample_confs/apidb_wdk_key.sample /usr/local/tomcat_instances/shared/.apidb_wdk_key` and edit to your needs.
     5. `cp /vagrant/sample_confs/euparc.sample /home/vagrant/.euparc` and edit to your needs.
- 
+
+To copy all these files into the correct locations in one step (but without any edits), run:
+```
+bash /vagrant/bin/addSampleConfigs.sh
+```
+
 11. Unpack and configure sites
 
 Try to deploy the genomics site by running the command:
