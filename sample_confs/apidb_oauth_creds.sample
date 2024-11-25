@@ -1,0 +1,3 @@
+# put edited copy of me in /usr/local/tomcat_instances/shared/.apidb_oauth_creds
+
+apicomponentsite: <oauth_client_secret>
