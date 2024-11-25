@@ -22,7 +22,9 @@ Depending on your Linux distribution, you may be able to use native packaging, o
 2. Check to make sure virtualization extensions are enabled
 
 Run this command to see if virtualization is enabled (if VT-x is present, you should be good to go)
-```> lscpu | grep "Virtualization"```
+```
+> lscpu | grep "Virtualization"
+```
 If not, [these instructions](https://www.geeksforgeeks.org/linux-how-to-detect-if-vt-x-has-been-turned-on-in-the-bios/) can help you enable virtualization in your OS.
 
 3. Clone this repo and create the VM
