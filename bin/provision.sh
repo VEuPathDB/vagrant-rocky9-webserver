@@ -19,12 +19,10 @@ printf "export JAVA_HOME=/usr/lib/jvm/java PATH=\$JAVA_HOME/bin:\$PATH" > java.s
 source /etc/profile.d/java.sh    # or log in again
 
 # perl and required modules
-sudo dnf install -y perl expat-devel # perl-XML-Simple
+sudo dnf install -y perl expat-devel perl-XML-Simple
 echo 'yes' | sudo cpan
-sudo cpan install XML::Simple
-sudo cpan install XML::Parser
 sudo cpan install XML::Twig
-sudo cpan install IO::String # JBrowse dep
+#sudo cpan install IO::String # JBrowse dep
 
 # python and ansible
 sudo dnf install -y python3 python3-pip ansible-core
@@ -35,24 +33,18 @@ sudo dnf install -y php nodejs
 # tsrc
 sudo pip3 install tsrc
 
-# Tomcat 9
-cd /usr/local
-tomcat_version=9.0.97
-sudo wget https://dlcdn.apache.org/tomcat/tomcat-9/v${tomcat_version}/bin/apache-tomcat-${tomcat_version}.tar.gz
-sudo tar zxvf apache-tomcat-${tomcat_version}.tar.gz
-sudo rm -f apache-tomcat-${tomcat_version}.tar.gz
-sudo ln -s apache-tomcat-${tomcat_version} tomcat
-cd -
+# install Tomcat 9, 10, and 11 from built RPMs
+rpmBuilderRelease="20241206"
+tomcatVersions=( "9.0.97" "10.1.33" "11.0.1" )
+for version in ${tomcatVersions[@]}; do
+  tomcatRpm="tomcat-$version-ebrc-1.x86_64.rpm"
+  wget "https://github.com/VEuPathDB/tool-tomcat-rpm-builder/releases/download/$rpmBuilderRelease/$tomcatRpm"
+  sudo rpm -i $tomcatRpm
+  rm $tomcatRpm
+done
 
-# Tomcat 10
-#   TODO: convert to RPM
-#cd /usr/local
-#tomcat_version=10.1.23
-#sudo wget https://dlcdn.apache.org/tomcat/tomcat-10/v${tomcat_version}/bin/apache-tomcat-${tomcat_version}.tar.gz
-#sudo wget https://downloads.apache.org/tomcat/tomcat-10/v${tomcat_version}/bin/apache-tomcat-${tomcat_version}.tar.gz.sha512
-#verify tomcat apache-tomcat-${tomcat_version}.tar.gz.sha512 /usr/local/apache-tomcat-${tomcat_version}.tar.gz
-#sudo rm apache-tomcat-${tomcat_version}.tar.gz.sha512
-#sudo tar zxvf apache-tomcat-${tomcat_version}.tar.gz
-#sudo rm -f apache-tomcat-${tomcat_version}.tar.gz
-#sudo ln -s apache-tomcat-${tomcat_version} tomcat
-#cd -
+# install Tomcat Instance Framework from release RPM
+tcifRpm=tomcat-instance-framework-2.2.0-1.el.x86_64.rpm
+wget https://github.com/VEuPathDB/tomcat-instance-framework/releases/download/2.2.0/$tcifRpm
+sudo rpm -i $tcifRpm
+rm $tcifRpm
