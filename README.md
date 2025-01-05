@@ -50,7 +50,12 @@ Note 2: If you encounter a timeout at "SSH auth method: private key", see [Troub
 </pre>
 Note: You will have to confirm the config by interactively typing 'Yes' during the running of this script.
 
-6. Supplement ~/.bashrc with github credentials and site tooling
+6. Install VEuPathDB Tomcat RPMs and Tomcat Instance Framework (TCIF).  This is done in a separate step in case you need to tweak the Tomcat/TCIF versions.
+<pre>
+> sudo bash /vagrant/bin/installTomcat.sh
+</pre>
+
+7. Supplement ~/.bashrc with github credentials and site tooling
 <pre>
 export GITHUB_USERNAME=#####
 export GITHUB_TOKEN=#####
@@ -58,24 +63,24 @@ export GITHUB_TOKEN=#####
 source /vagrant/bin/devTools.sh
 </pre>
 
-7. Log out and back in again to get a clean shell, this time with your local SSH keys
+8. Log out and back in again to get a clean shell, this time with your local SSH keys
 <pre>
 > exit
 > vagrant ssh -- -A
 </pre>
 
-8. Create a website build framework and build initial tarballs of all four cohorts
+9. Create a website build framework and build initial tarballs of all four cohorts
 <pre>
 > bash /vagrant/bin/buildSiteArtifacts.sh
 </pre>
 If you encounter "Permission Denied" errors accessing Github, recheck your GITHUB_* env vars and that you SSHed in with the -A option.  If it still does not work, try the gotcha fixes [here](https://veupathdb.atlassian.net/wiki/spaces/TECH/pages/108560402/Deploy+Containerized+Services+for+Local+Development#Gotchas-around-SSH-Agent).  If it still does not work, see [Trouble Shooting #2](https://github.com/VEuPathDB/vagrant-rocky9-webserver/edit/main/README.md#trouble-shooting-2).
 
-9. Build out a directory structure for sites and create test sites for each cohort (TODO: use tomcat_instance_framework here)
+10. Build out a directory structure for sites and create test sites for each cohort (TODO: use tomcat_instance_framework here)
 <pre>
 > sudo bash /vagrant/bin/buildSiteDeploymentDirs.sh
 </pre>
 
-10. Create conifer configuration dependencies
+11. Create conifer configuration dependencies
 
     1. You will need different conifer_site_vars.yml files for each cohort site.  To start out:
         1. `cp /vagrant/sample_confs/conifer_site_vars.yml.test /home/vagrant/site_builds/site_vars/conifer_site_vars.yml.plasmo` and edit to your needs.
@@ -89,14 +94,14 @@ To copy all these files into the correct locations in one step (but without any 
 bash /vagrant/bin/addSampleConfigs.sh
 ```
 
-11. Unpack and configure sites
+12. Unpack and configure sites
 
 Try to deploy the genomics site by running the command:
 <pre>
 > ./gus-site-build-deploy/bin/veupath-unpack-and-configure.sh ~/site_builds/build/api/ApiCommonPresenters_*.tar.gz /var/www/test.plasmodb.org site_vars/conifer_site_vars.yml.plasmo
 </pre>
 
-12. When finished testing your local website, destroy the VM with
+13. When finished testing your local website, destroy the VM with
 <pre>
 > vagrant destroy -f
 </pre>
