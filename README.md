@@ -75,8 +75,9 @@ source /vagrant/bin/devTools.sh
 </pre>
 If you encounter "Permission Denied" errors accessing Github, recheck your GITHUB_* env vars and that you SSHed in with the -A option.  If it still does not work, try the gotcha fixes [here](https://veupathdb.atlassian.net/wiki/spaces/TECH/pages/108560402/Deploy+Containerized+Services+for+Local+Development#Gotchas-around-SSH-Agent).  If it still does not work, see [Trouble Shooting #2](https://github.com/VEuPathDB/vagrant-rocky9-webserver/edit/main/README.md#trouble-shooting-2).
 
-10. Build out a directory structure for sites and create test sites for each cohort (TODO: use tomcat_instance_framework here)
+10. Create Tomcat instances for each cohort, build out a directory structure for sites, and create test sites
 <pre>
+> sudo bash /vagrant/bin/createTomcatInstances.sh
 > sudo bash /vagrant/bin/buildSiteDeploymentDirs.sh
 </pre>
 

@@ -5,7 +5,7 @@ sudo dnf update -y
 sudo dnf upgrade -y
 
 # basic build/dev tools
-sudo dnf install -y epel-release wget emacs gcc gcc-c++ git
+sudo dnf install -y epel-release wget emacs gcc gcc-c++ git rpm-build
 
 # java and related tools
 sudo dnf install -y java-21-openjdk java-21-openjdk-devel ant maven
@@ -31,20 +31,4 @@ sudo dnf install -y python3 python3-pip ansible-core
 sudo dnf install -y php nodejs
 
 # tsrc
-sudo pip3 install tsrc
-
-# install Tomcat 9, 10, and 11 from built RPMs
-rpmBuilderRelease="20241206"
-tomcatVersions=( "9.0.97" "10.1.33" "11.0.1" )
-for version in ${tomcatVersions[@]}; do
-  tomcatRpm="tomcat-$version-ebrc-1.x86_64.rpm"
-  wget "https://github.com/VEuPathDB/tool-tomcat-rpm-builder/releases/download/$rpmBuilderRelease/$tomcatRpm"
-  sudo rpm -i $tomcatRpm
-  rm $tomcatRpm
-done
-
-# install Tomcat Instance Framework from release RPM
-tcifRpm=tomcat-instance-framework-2.2.0-1.el.x86_64.rpm
-wget https://github.com/VEuPathDB/tomcat-instance-framework/releases/download/2.2.0/$tcifRpm
-sudo rpm -i $tcifRpm
-rm $tcifRpm
+pip3 install tsrc
