@@ -12,7 +12,7 @@ for fullVersion in ${tomcatVersions[@]}; do
 done
 
 # install Tomcat Instance Framework from release RPM
-tcifVersion=2.5.0
+tcifVersion=2.5.1
 tcifRpm=tomcat-instance-framework-$tcifVersion-1.el9.x86_64.rpm
 wget https://github.com/VEuPathDB/tomcat-instance-framework/releases/download/$tcifVersion/$tcifRpm
 sudo rpm -i $tcifRpm

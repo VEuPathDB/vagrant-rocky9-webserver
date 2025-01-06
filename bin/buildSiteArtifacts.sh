@@ -27,6 +27,13 @@ cd conifer
 git checkout rhel-9
 cd ..
 
+# Use Java 21 / Tomcat 9 brances of the following projects
+for project in "EbrcWebsiteCommon" "FgpUtil" "MicrobiomeWebsite" "OAuth2Server" "WDK" "install"; do
+  cd $project
+  git checkout j21tc9
+  cd ..
+done
+
 # back up out of project_home
 cd ..
 
