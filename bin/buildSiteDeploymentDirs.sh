@@ -1,32 +1,30 @@
 #!/bin/bash
 
 sites=(
-    "PlasmoDB/plasmo.test:test.plasmodb.org"
-    "PlasmoDB/plasmo.b69:q2.plasmodb.org"
-    "OrthoMCL/orthomcl.test:test.orthomcl.org"
-    "ClinEpiDB/ce.test:test.clinepidb.org"
-    "MicrobiomeDB/mbio.test:test.microbiomedb.org"
+    "PlasmoDB:plasmo.test:test.plasmodb.org"
+    "PlasmoDB:plasmo.b69:q2.plasmodb.org"
+    "OrthoMCL:orthomcl.test:test.orthomcl.org"
+    "ClinEpiDB:ce.test:test.clinepidb.org"
+    "MicrobiomeDB:mbio.test:test.microbiomedb.org"
 )
 
-mkdir -p /var/www
-cd /var/www
+topDir=/var/www
 
 # loop through sites defined above
 for site in ${sites[@]}; do
 
     # pick out data for this site
     dataArray=( $(echo $site | sed 's/:/ /g') )
-    tomcatDir=${dataArray[0]}
-    domainLink=${dataArray[1]}
+    instance=${dataArray[0]}
+    webapp=${dataArray[1]}
+    domain=${dataArray[2]}
+
+    echo "Will create site $domain in $topDir/$instance as webapp $webapp"
 
     # create domain soft link to tomcat instance webapp dir
-    mkdir -p $tomcatDir
-    chmod -R 777 $tomcatDir/..
-    ln -s $tomcatDir $domainLink
-
-    # make soft link to project_home (eases reruns of conifer, if needed)
-    cd $domainLink
-    ln -s /home/vagrant/site_builds/project_home
-    cd - &> /dev/null
+    sudo chmod 777 $topDir/$instance
+    mkdir $topDir/$instance/$webapp
+    sudo chmod 755 $topDir/$instance
+    sudo ln -s $topDir/$instance/$webapp $topDir/$domain
 
 done
