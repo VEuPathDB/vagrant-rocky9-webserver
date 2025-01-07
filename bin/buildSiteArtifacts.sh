@@ -19,7 +19,7 @@ fi
 
 # Temporary(?) hack; do not install JBrowse for node/python issues in Rocky9
 cd ApiCommonWebsite
-git checkout no-jbrowse
+#git checkout no-jbrowse
 cd ..
 
 # Need special conifer branch for python3 + ansible8
@@ -28,7 +28,7 @@ git checkout rhel-9
 cd ..
 
 # Use Java 21 / Tomcat 9 brances of the following projects
-for project in "EbrcWebsiteCommon" "FgpUtil" "MicrobiomeWebsite" "OAuth2Server" "WDK" "install"; do
+for project in "ApiCommonWebsite" "ClinEpiWebsite" "EbrcWebsiteCommon" "FgpUtil" "MicrobiomeWebsite" "OAuth2Server" "OrthoMCLService" "WDK" "install"; do
   cd $project
   git checkout j21tc9
   cd ..
