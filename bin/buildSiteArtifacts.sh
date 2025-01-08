@@ -17,17 +17,13 @@ if [ ! -e .tsrc ]; then
   tsrc init git@github.com:VEuPathDB/tsrc.git --group websiteRelease  
 fi
 
-# Temporary(?) hack; do not install JBrowse for node/python issues in Rocky9
-cd ApiCommonWebsite
-#git checkout no-jbrowse
-cd ..
-
 # Need special conifer branch for python3 + ansible8
 cd conifer
 git checkout rhel-9
 cd ..
 
-# Use Java 21 / Tomcat 9 brances of the following projects
+# Use Java 21 / Tomcat 9 branches of the following projects
+#  NOTE: the branch in ApiCommonWebsite removes JBrowse from the build due to node/python issues in Rocky 9
 for project in "ApiCommonWebsite" "ClinEpiWebsite" "EbrcWebsiteCommon" "FgpUtil" "MicrobiomeWebsite" "OAuth2Server" "OrthoMCLService" "WDK" "install"; do
   cd $project
   git checkout j21tc9
