@@ -1,9 +1,9 @@
 modelconfig_accountDb_connectionUrl: jdbc:oracle:oci:@acctDbN
 modelconfig_accountDb_login: rdoherty
-modelconfig_accountDb_password: <password>
-modelconfig_appDb_connectionUrl: jdbc:oracle:oci:@<appdb>
+modelconfig_accountDb_password: my_db_password
+modelconfig_appDb_connectionUrl: jdbc:oracle:oci:@my_appdb
 modelconfig_appDb_login: rdoherty
-modelconfig_appDb_password: <password>
+modelconfig_appDb_password: my_db_password
 modelconfig_userDb_connectionUrl: jdbc:oracle:oci:@apicommDevN
 modelconfig_userDb_login: rdoherty
-modelconfig_userDb_password: <password>
+modelconfig_userDb_password: my_db_password
