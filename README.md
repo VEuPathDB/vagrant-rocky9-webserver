@@ -116,16 +116,24 @@ b. Build initial website tarballs for all four cohorts
 
 This portion can be rerun manually via `bash /vagrant/bin/3.2-buildSiteArtifacts.sh`
 
-c. Unpack the resulting tarballs into our test site directories, configure the sites, and deploy the webapps to the correct Tomcat instances
+c. Unpack the resulting tarballs into our test site directories and configure the sites
 
 This portion can be rerun manually via `bash /vagrant/bin/3.3-unpackAndConfigureSites.sh`
 
 ### 7. Deploy Configured Webapps
 
-oracletunnel
+Before deploying the webapps, an SSH tunnel must be establshed to allow access to VEuPathDB databases.  During configuration, an alias called `oracletunnel` should have been added to accomplish this.
 
-4.0-deploySites.sh
+Open a second terminal window on your host machine and establish the tunnel as follows:
+```
+[my-host-laptop vagrant-rocky9-webserver]$ vagrant ssh
+[vagrant@localhost ~]$ oracletunnel
+```
 
+You can now deploy the webapps to the correct Tomcat instances by running:
+```
+> bash /vagrant/bin/4.0-deploySites.sh
+```
 
 Note: the QA Plasmo site should configure without failure; however, its configuration file uses the Oracle oci driver's connection URL, which is not supported, so the QA webapp is not deployed to Tomcat
 
