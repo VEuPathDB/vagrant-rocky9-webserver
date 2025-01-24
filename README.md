@@ -149,9 +149,11 @@ Some parts of the sites' web client requires accessing the site by the configure
 
 If all went well above, you should be able to access the sites at the following URLs.  Note that FireFox uses its own DNS and does not support changes to /etc/hosts, so use Brave or similar to access the sites.
 ```
-http://test.plasmodb.org:
+http://test.plasmodb.org:19010/plasmo.test
+http://test.orthomcl.org:19020/orthomcl.test
+http://test.clinepidb.org:19030/ce.test
+http://test.microbiomedb.org:19040/mbio.test
 ```
-
 
 ### 9. When finished testing your local website, destroy the VM with
 <pre>
