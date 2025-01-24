@@ -1,4 +1,8 @@
 #!/bin/bash
+if [[ $EUID > 0 ]]; then
+  echo "Please run as root"
+  exit
+fi
 
 cd /usr/local/tomcat_instances
 
@@ -15,8 +19,10 @@ makeInstance() {
     TEMPLATE=9.0.x \
     CATALINA_HOME=/usr/local/tomcat-9
   sudo mkdir /var/www/$projectId
+  sudo instance_manager start $projectId
 }
 
+# will create four instances running on http ports 19010, 19020, 19030, 19040
 portSegment=1
 for projectId in "PlasmoDB" "OrthoMCL" "MicrobiomeDB" "ClinEpiDB"; do
   echo "Creating Tomcat instance for $projectId with port segment $portSegment"

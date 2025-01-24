@@ -1,3 +1,5 @@
 .project
 .vagrant
 *~
+conf
+site_builds

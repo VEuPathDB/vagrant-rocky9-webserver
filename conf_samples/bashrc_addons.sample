@@ -1,0 +1,53 @@
+#!/bin/sh
+
+##############################################
+##  customize these values
+##############################################
+
+githubUsername=myGithubUsername
+githubToken=myGithubToken
+
+tunnelServer=veupathdbServer
+tunnelUser=username
+
+oracleServer1=dbServer1
+mappedPort1=port1
+
+oracleServer2=dbServer2
+mappedPort2=port2
+
+##############################################
+##  export github credentials
+##############################################
+
+export GITHUB_USERNAME=$myGithubUsername
+export GITHUB_TOKEN=$myGithubToken
+
+##############################################
+##  utilities to set env to a site
+##############################################
+
+if [ "$NON_GUS_PATH" == "" ]; then
+    export NON_GUS_PATH=$PATH
+fi
+
+setsite() {
+    siteDomain=$1
+    export GUS_HOME=/var/www/$siteDomain/gus_home
+    export PROJECT_HOME=/var/www/$siteDomain/project_home
+    export PATH=$GUS_HOME/bin:$PROJECT_HOME/install/bin:$NON_GUS_PATH
+}
+
+# set initial site
+setsite test.plasmodb.org
+
+##############################################
+##  create alias for DB tunneling
+##############################################
+
+alias oracletunnel="ssh -A \
+ -L ${mappedPort1}:${oracleServer1}:1521 \
+ -L ${mappedPort2}:${oracleServer2}:1521 \
+ $tunnelUser@$tunnelServer"
+
+alias ll='ls -alF'

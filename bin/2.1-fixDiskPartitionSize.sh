@@ -1,4 +1,8 @@
 #!/bin/bash
+if [[ $EUID > 0 ]]; then
+  echo "Please run as root"
+  exit
+fi
 
 echo
 echo "Fixing sda5 disk size"

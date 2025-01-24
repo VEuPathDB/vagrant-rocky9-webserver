@@ -1,4 +1,12 @@
 #!/bin/bash
+if [[ $EUID > 0 ]]; then
+  echo "Please run as root"
+  exit
+fi
+
+###################################
+## Requires sudo
+###################################
 
 sites=(
     "PlasmoDB:plasmo.test:test.plasmodb.org"
@@ -9,6 +17,9 @@ sites=(
 )
 
 topDir=/var/www
+
+mkdir -p $topDir/Common/tmp/wdkStepAnalysisJobs
+chmod -R 777 $topDir/Common
 
 # loop through sites defined above
 for site in ${sites[@]}; do
@@ -22,9 +33,11 @@ for site in ${sites[@]}; do
     echo "Will create site $domain in $topDir/$instance as webapp $webapp"
 
     # create domain soft link to tomcat instance webapp dir
-    sudo chmod 777 $topDir/$instance
-    mkdir $topDir/$instance/$webapp
-    sudo chmod 755 $topDir/$instance
-    sudo ln -s $topDir/$instance/$webapp $topDir/$domain
-
+    chmod 755 $topDir/$instance
+    mkdir -p $topDir/$instance/$webapp
+    chown vagrant $topDir/$instance/$webapp
+    chgrp vagrant $topDir/$instance/$webapp
+    if [ ! -e $topDir/$domain ]; then
+      ln -s $topDir/$instance/$webapp $topDir/$domain
+    fi
 done
